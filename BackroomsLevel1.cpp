@@ -11,15 +11,13 @@ ABackroomsLevel1::ABackroomsLevel1()
 void ABackroomsLevel1::BeginPlay()
 {
     Super::BeginPlay();
-
     if (ObjectiveWidgetClass)
     {
-        UUserWidget* ObjectiveWidget = CreateWidget<UUserWidget>(
+        UUserWidget* ObjectiveWidget= CreateWidget<UUserWidget>(
             GetWorld(),
             ObjectiveWidgetClass,
             TEXT("ObjectiveWidget")
         );
-        
         if (ObjectiveWidget)
         {
             ObjectiveWidget->AddToViewport();
