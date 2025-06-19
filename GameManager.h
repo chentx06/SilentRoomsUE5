@@ -1,5 +1,4 @@
 #pragma once
-
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Blueprint/UserWidget.h"
@@ -12,13 +11,12 @@ class YOURPROJECT_API AGameManager : public AActor
     
 public:    
     AGameManager();
-
 protected:
     virtual void BeginPlay() override;
-
 public:
     UFUNCTION()
     void OnObjectCollected();
+
 
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Game Manager")
     int32 ObjectsCollected;
@@ -28,7 +26,6 @@ public:
 
     UPROPERTY()
     class UUserWidget* ObjectiveUI;
-
 private:
     void UpdateObjectiveText(const FText& NewText);
 };
