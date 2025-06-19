@@ -7,6 +7,7 @@ void Umainmenu1::NativeConstruct()
 {
     Super::NativeConstruct();
 
+    //buttons some removed 
     if (PlayButton) PlayButton->OnClicked.AddDynamic(this, &Umainmenu1::OnPlayButtonClicked);
     if (SettingsButton) SettingsButton->OnClicked.AddDynamic(this, &Umainmenu1::OnSettingsButtonClicked);
     if (BackButton) BackButton->OnClicked.AddDynamic(this, &Umainmenu1::OnBackButtonClicked);
@@ -14,29 +15,28 @@ void Umainmenu1::NativeConstruct()
     if (MusicSlider) MusicSlider->OnValueChanged.AddDynamic(this, &Umainmenu1::OnMusicSliderChanged);
 }
 
+
 void Umainmenu1::OnPlayButtonClicked()
 {
     RemoveFromParent();
     UGameplayStatics::OpenLevel(GetWorld(), "BackroomsLevel0", true);
 }
-
 void Umainmenu1::OnSettingsButtonClicked()
 {
     if (BorderPanel) BorderPanel->SetVisibility(ESlateVisibility::Visible);
     if (SettingsPanel) SettingsPanel->SetVisibility(ESlateVisibility::Visible);
 }
-
 void Umainmenu1::OnBackButtonClicked()
 {
     if (BorderPanel) BorderPanel->SetVisibility(ESlateVisibility::Hidden);
     if (SettingsPanel) SettingsPanel->SetVisibility(ESlateVisibility::Hidden);
 }
-
 void Umainmenu1::OnResetButtonClicked()
 {
     if (MusicSlider) MusicSlider->SetValue(0.5f);
 }
 
+//has to connect to actual volume
 void Umainmenu1::OnMusicSliderChanged(float Value)
 {
     UGameplayStatics::SetSoundMixClassOverride(
