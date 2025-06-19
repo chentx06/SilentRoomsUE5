@@ -11,7 +11,6 @@ ABackroomsLevel0::ABackroomsLevel0()
 void ABackroomsLevel0::BeginPlay()
 {
     Super::BeginPlay();
-
     APlayerController* PlayerController = UGameplayStatics::GetPlayerController(this, 0);
     if (PlayerController)
     {
