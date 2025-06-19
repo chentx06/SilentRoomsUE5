@@ -7,17 +7,16 @@
 
 Achaseai::Achaseai()
 {
-    PrimaryActorTick.bCanEverTick = true;
+    PrimaryActorTick.bCanEverTick= true;
 
-    BehaviorTreeComponent = CreateDefaultSubobject<UBehaviorTreeComponent>(TEXT("BehaviorTreeComponent"));
-    BlackboardComponent = CreateDefaultSubobject<UBlackboardComponent>(TEXT("BlackboardComponent"));
+    BehaviorTreeComponent= CreateDefaultSubobject<UBehaviorTreeComponent>(TEXT("BehaviorTreeComponent"));
+    BlackboardComponent= CreateDefaultSubobject<UBlackboardComponent>(TEXT("BlackboardComponent"));
 }
 
 void Achaseai::BeginPlay()
 {
     Super::BeginPlay();
-
-    PlayerPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
+    PlayerPawn= UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
     GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &Achaseai::ChasePlayer, 0.2f, false);
 }
 
@@ -29,10 +28,9 @@ void Achaseai::ChasePlayer()
         {
             BlackboardComponent->SetValueAsObject("TargetActor", PlayerPawn);
         }
-
         if (BehaviorTreeComponent)
         {
-            BehaviorTreeComponent->StartTree(*BehaviorTree);
+            BehaviorTreeComponent ->StartTree(*BehaviorTree);
         }
     }
 }
