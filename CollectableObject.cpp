@@ -7,17 +7,17 @@
 
 ACollectableObject::ACollectableObject()
 {
-    PrimaryActorTick.bCanEverTick = false;
+    PrimaryActorTick.bCanEverTick= false;
 }
 
-void ACollectableObject::BeginPlay()
+void ACollectableObject ::BeginPlay()
 {
     Super::BeginPlay();
 
     if (InteractionBox)
     {
-        InteractionBox->OnComponentBeginOverlap.AddDynamic(this, &ACollectableObject::OnComponentBeginOverlap);
-        InteractionBox->OnComponentEndOverlap.AddDynamic(this, &ACollectableObject::OnComponentEndOverlap);
+        InteractionBox ->OnComponentBeginOverlap.AddDynamic(this, &ACollectableObject::OnComponentBeginOverlap);
+        InteractionBox ->OnComponentEndOverlap.AddDynamic(this, &ACollectableObject::OnComponentEndOverlap);
     }
 
     EnableInput(UGameplayStatics::GetPlayerController(GetWorld(), 0));
@@ -27,33 +27,29 @@ void ACollectableObject::OnComponentBeginOverlap(UPrimitiveComponent* Overlapped
 {
     if (Cast<AFirstPersonCharacter>(OtherActor))
     {
-        CanPickUp = true;
+        CanPickUp= true;
     }
 }
-
 void ACollectableObject::OnComponentEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
     if (Cast<AFirstPersonCharacter>(OtherActor))
     {
-        CanPickUp = false;
+        CanPickUp= false;
     }
 }
-
 void ACollectableObject::OnEKeyPressed()
 {
     if (CanPickUp)
     {
-        TArray<AActor*> FoundActors;
+        TArray<AActor *> FoundActors;
         UGameplayStatics::GetAllActorsOfClass(GetWorld(), AGameManager::StaticClass(), FoundActors);
-
         if (FoundActors.Num() > 0)
         {
-            if (AGameManager* GameManager = Cast<AGameManager>(FoundActors[0]))
+            if (AGameManager* GameManager= Cast<AGameManager>(FoundActors[0]))
             {
                 GameManager->OnObjectCollected();
             }
         }
-
         Destroy();
     }
 }
