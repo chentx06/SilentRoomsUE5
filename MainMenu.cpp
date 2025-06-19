@@ -20,16 +20,17 @@ void AMainMenu::BeginPlay()
 
     if (MainMenuWidgetClass)
     {
-        UUserWidget* MainMenuWidget = CreateWidget<UUserWidget>(GetWorld(), MainMenuWidgetClass);
+        UUserWidget* MainMenuWidget= CreateWidget<UUserWidget>(GetWorld(), MainMenuWidgetClass);
         if (MainMenuWidget)
         {
             MainMenuWidget->AddToViewport();
+
             
             APlayerController* PlayerController = UGameplayStatics::GetPlayerController(this, 0);
             if (PlayerController)
             {
                 UWidgetBlueprintLibrary::SetInputMode_UIOnlyEx(PlayerController, MainMenuWidget, EMouseLockMode::DoNotLock, false);
-                PlayerController->bShowMouseCursor = true;
+                PlayerController->bShowMouseCursor= true;
             }
         }
     }
