@@ -6,7 +6,6 @@
 Ateleportdoor::Ateleportdoor()
 {
     PrimaryActorTick.bCanEverTick = false;
-
     TeleportTrigger = CreateDefaultSubobject<UBoxComponent>(TEXT("TeleportTrigger"));
     RootComponent = TeleportTrigger;
 }
@@ -14,13 +13,13 @@ Ateleportdoor::Ateleportdoor()
 void Ateleportdoor::BeginPlay()
 {
     Super::BeginPlay();
-
     if (TeleportTrigger)
     {
         TeleportTrigger->OnComponentBeginOverlap.AddDynamic(this, &Ateleportdoor::OnOverlapBegin);
     }
 }
 
+//collision
 void Ateleportdoor::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
     if (ABP_FirstPersonCharacter* Player = Cast<ABP_FirstPersonCharacter>(OtherActor))
